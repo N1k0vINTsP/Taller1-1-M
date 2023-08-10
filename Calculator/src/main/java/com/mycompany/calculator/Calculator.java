@@ -1,17 +1,19 @@
 package com.mycompany.calculator;
 
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Calculator {
 
     public static void main(String[] args) throws InterruptedException {
         Scanner digitar = new Scanner(System.in);
-
+        DecimalFormat df = new DecimalFormat("#.#####");
+        
         int opc = 0;
         float numA;
-        float numB;
-        float resultado = 0; 
+        float numB = 0;
+        float resultado; 
         double angulo;
         double pi = Math.PI;
         double resultrigo = 0;
@@ -112,23 +114,28 @@ public class Calculator {
 
                 System.out.println("Ingrese el angulo en °: ");
                 angulo = digitar.nextDouble();
-                if (numB != 0 || ) {
-                angulo = angulo*(pi/180);
-                resultrigo = Math.tan(angulo);
+                if (numB == 0 || numB %90==0) {
+                    
+                    System.out.println("\n\n Resultado: INDEFENIDO ");
+                }
+                else{
+                   angulo = angulo*(pi/180);
+                   resultrigo = Math.tan(angulo);
 
-                System.out.println("\n\n Resultado: " + resultrigo);
-                break;
+                   System.out.println("\n\n Resultado: " + resultrigo);
+                }
+                  break; 
 
             case 8:
 
                 System.out.println("\n\n Hasta la proxima :D");
-                break;
+                return;
                 
             default:
                 System.out.println("\n Operacion no encontrada, vuelva a intentar.");
                 return;
         }
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         }
     }
 
