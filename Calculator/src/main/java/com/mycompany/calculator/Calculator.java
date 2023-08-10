@@ -1,14 +1,14 @@
 package com.mycompany.calculator;
 
 
-import java.text.DecimalFormat;
+
 import java.util.Scanner;
 
 public class Calculator {
 
     public static void main(String[] args) throws InterruptedException {
         Scanner digitar = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("#.#####");
+
         
         int opc = 0;
         float numA;
@@ -96,6 +96,7 @@ public class Calculator {
                 angulo = digitar.nextDouble();
                 angulo = angulo*(pi/180);
                 resultrigo = Math.sin(angulo);
+                resultrigo = Math.round(resultrigo*100000)/100000.0;
 
                 System.out.println("\n\n Resultado: " + resultrigo);
                 break;
@@ -106,7 +107,7 @@ public class Calculator {
                 angulo = digitar.nextDouble();
                 angulo = angulo*(pi/180);
                 resultrigo = Math.cos(angulo);
-
+                resultrigo = Math.round(resultrigo*100000)/100000.0;
                 System.out.println("\n\n Resultado: " + resultrigo);
                 break;
 
@@ -121,6 +122,7 @@ public class Calculator {
                 else{
                    angulo = angulo*(pi/180);
                    resultrigo = Math.tan(angulo);
+                   resultrigo = Math.round(resultrigo*100000)/100000.0;
 
                    System.out.println("\n\n Resultado: " + resultrigo);
                 }
