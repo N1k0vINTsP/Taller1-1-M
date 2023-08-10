@@ -82,6 +82,7 @@ public class Calculator {
                 numB = digitar.nextFloat();
                 if (numB != 0) {
                     resultado = numA / numB;
+                    resultado = (float) (Math.round(resultado*100000)/100000.0);
                     System.out.println("\n\n Resultado: " + resultado);
                 } else {
                     System.out.println(" INDEFINIDO. No se puede dividir entre cero.");
