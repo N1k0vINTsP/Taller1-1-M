@@ -1,7 +1,6 @@
 
 import java.util.Scanner;
 
-
 class OperacionBasica{
 
     double operar(int opc, double numA, double numB){
@@ -107,8 +106,8 @@ class OperacionTrigonometrica extends OperacionBasica{
 }
 
 
-public class Calculator {
 
+public class Calculator{
     public static void main(String[] args) throws InterruptedException {
         Scanner digitar = new Scanner(System.in);
         OperacionTrigonometrica op = new OperacionTrigonometrica();
@@ -196,13 +195,19 @@ public class Calculator {
 
                             }else{
 
-                                System.out.print("Ingrese el primer número: ");
-                                numA = digitar.nextDouble();
-                                System.out.print("Ingrese el segundo número: ");
-                                numB = digitar.nextDouble();
-                                resultado = op.operar(opc, numA, numB);
-                                if(!Double.isNaN(resultado)){
+                                if(opc == 1 || opc == 2 || opc == 3 || opc == 4 ){
+
+                                    System.out.print("Ingrese el primer número: ");
+                                    numA = digitar.nextDouble();
+                                    System.out.print("Ingrese el segundo número: ");
+                                    numB = digitar.nextDouble();
+                                    resultado = op.operar(opc, numA, numB);
+                                    if(!Double.isNaN(resultado)){
                                     resultado = (Math.round(resultado*100000)/100000.0);
+                                    }
+                                }else{
+
+                                    resultado = op.operar(opc, 0, 0);
                                 }
                             }
                         }
@@ -220,11 +225,10 @@ public class Calculator {
             }
 
             
-
-        }while (opc < 0 || opc > 8);
+        }while (opc > 0 || opc < 11);
 
         }
-
+        
      
     }
 
