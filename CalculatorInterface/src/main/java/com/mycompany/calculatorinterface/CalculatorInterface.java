@@ -14,29 +14,87 @@ class OperacionBasica{
     double operar(String operacion, double numA, double numB){
 
          switch (operacion) {
-            case "+":
+            case "+" -> {
+                //suma
                 return numA+numB;
-            default:
-                return Double.NaN;             
+            }
+            case "-" -> {
+                //resta
+                return numA - numB;
+            }
+
+            case "*" -> {
+                //multiplicacion
+                return numA * numB;
+            }
+                
+            case "/" -> {
+                //division
+                if (numB != 0) {
+                    return numA / numB;      
+                } else {
+                    return Double.NaN;
+                }
+            }
+
+            case "^" -> {
+                //potencia enesima
+                return Math.pow(numA, numB);//numA es la base y numB es el exponente
+            }
+            case "√" -> {
+                // raiz enesima
+                if(numA == 0 && numB<0 || numA == 0 && numB == 0 || numA<0){
+                    return Double.NaN;
+                }else{
+                    return Math.pow(numA, 1.0/numB); //numA es el radicando y numB es el indice
+                }
+            }
+
+            case "IVA" -> {
+                // Calculo IVA
+                return numA*(numB/100);
+            }
+            default -> {             
+                return Double.NaN;
+            }
          }
     }
  } 
 
 class OperacionTrigonometrica extends OperacionBasica{
     
-    private double pi = Math.PI;
+    private final double pi = Math.PI;
     @Override
     double operar(String operacion, double numA, double numB){
         switch (operacion) {
-//        
-//            case 7:
-//                //seno
-//                System.out.println("\nSENO");
-//                numA = numA*(pi/180);
-//                return Math.sin(numA);
-            default:
-                
+        
+            case "sin" -> {
+                //seno
+                numB = numB*(pi/180);
+                return Math.sin(numB);
+            }
+            case "cos" -> {
+                //coseno
+                numB = numB*(pi/180);
+                return Math.cos(numB);
+            }
+
+            case "tan" -> {
+                //tangente
+                if (numB == 0 || numB %90==0) {
+                    
+                    System.out.println("Resultado: INDEFENIDO ");
+                    return Double.NaN;
+                }
+                else{
+                    numB = numB*(pi/180);
+                    return Math.tan(numB);
+                }
+            }
+            
+            default -> {
                 return super.operar(operacion, numA, numB);
+            }
         }
     }
 }
@@ -63,6 +121,8 @@ class OperacionTrigonometrica extends OperacionBasica{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         Display = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -88,10 +148,16 @@ class OperacionTrigonometrica extends OperacionBasica{
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
+        MiniDisplay = new javax.swing.JLabel();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VINCENT f(x) - 777", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
         Display.setBackground(new java.awt.Color(153, 255, 153));
         Display.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -116,6 +182,11 @@ class OperacionTrigonometrica extends OperacionBasica{
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText(".");
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton4.setText("=");
@@ -219,6 +290,11 @@ class OperacionTrigonometrica extends OperacionBasica{
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("IVA");
         jButton13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setBackground(new java.awt.Color(255, 153, 51));
         jButton14.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -235,18 +311,33 @@ class OperacionTrigonometrica extends OperacionBasica{
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("▫√□");
         jButton15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setBackground(new java.awt.Color(51, 51, 51));
         jButton16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("□^▫");
         jButton16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setBackground(new java.awt.Color(51, 51, 51));
         jButton17.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton17.setForeground(new java.awt.Color(255, 255, 255));
         jButton17.setText("tan");
         jButton17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setBackground(new java.awt.Color(51, 51, 51));
         jButton18.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -264,30 +355,55 @@ class OperacionTrigonometrica extends OperacionBasica{
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("-");
         jButton19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jButton20.setBackground(new java.awt.Color(51, 51, 51));
         jButton20.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("/");
         jButton20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         jButton21.setBackground(new java.awt.Color(51, 51, 51));
         jButton21.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton21.setForeground(new java.awt.Color(255, 255, 255));
         jButton21.setText("*");
         jButton21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton22.setBackground(new java.awt.Color(51, 51, 51));
         jButton22.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton22.setForeground(new java.awt.Color(255, 255, 255));
         jButton22.setText("sin");
         jButton22.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         jButton23.setBackground(new java.awt.Color(51, 51, 51));
         jButton23.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton23.setForeground(new java.awt.Color(255, 255, 255));
         jButton23.setText("cos");
         jButton23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 51), new java.awt.Color(204, 204, 204), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 255, 204)));
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setBackground(new java.awt.Color(0, 0, 0));
         jButton24.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -300,18 +416,47 @@ class OperacionTrigonometrica extends OperacionBasica{
             }
         });
 
+        MiniDisplay.setBackground(new java.awt.Color(153, 255, 153));
+        MiniDisplay.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        MiniDisplay.setForeground(new java.awt.Color(0, 102, 0));
+        MiniDisplay.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MiniDisplay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 0), new java.awt.Color(0, 51, 51), new java.awt.Color(255, 255, 0), new java.awt.Color(153, 204, 0)));
+        MiniDisplay.setOpaque(true);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Display, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(MiniDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Display, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -339,38 +484,18 @@ class OperacionTrigonometrica extends OperacionBasica{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 6, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MiniDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,7 +512,7 @@ class OperacionTrigonometrica extends OperacionBasica{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -409,10 +534,10 @@ class OperacionTrigonometrica extends OperacionBasica{
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -423,7 +548,7 @@ class OperacionTrigonometrica extends OperacionBasica{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -485,7 +610,7 @@ class OperacionTrigonometrica extends OperacionBasica{
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
+        // SUMA
         this.numA=Double.parseDouble(this.Display.getText());
         this.operacion = "+";
         this.Display.setText("");
@@ -493,14 +618,100 @@ class OperacionTrigonometrica extends OperacionBasica{
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        this.numB=Double.parseDouble(this.Display.getText());
-        
-        if("+".equals(this.operacion)){
-            
-                this.Display.setText(Double.toString(this.resultado = op.operar(operacion, numA, numB)));
+        // IGUAL
+        if("+".equals(this.operacion)|| "-".equals(this.operacion)|| "*".equals(this.operacion)|| "/".equals(this.operacion)||"√".equals(this.operacion)||"^".equals(this.operacion)|| "IVA".equals(this.operacion)){
+           
+            this.numB=Double.parseDouble(this.Display.getText());
+            this.resultado = op.operar(operacion, numA, numB);
+            if(!Double.isNaN(resultado)){
+                resultado = (Math.round(resultado*100000)/100000.0);
+            }
+            this.Display.setText(Double.toString(this.resultado));
         }
+        
+        if("sin".equals(this.operacion)|| "cos".equals(this.operacion)|| "tan".equals(this.operacion)){
+            
+            this.numB=Double.parseDouble(this.Display.getText());
+            this.resultado = op.operar(operacion, 0, numB);
+            if(!Double.isNaN(resultado)){
+                resultado = (Math.round(resultado*100000)/100000.0);
+            }
+            this.Display.setText(Double.toString(this.resultado));
+        }
+             
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // RESTA
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "-";
+        this.Display.setText("");
+        
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // MULTIPLICACION
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "*";
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // DIVISION
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "/";
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // PUNTO DECIMAL
+        if(!this.Display.getText().contains(".")){
+            this.Display.setText(this.Display.getText()+".");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // POTENCIA ENESIMA
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "^";
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // RAIZ ENESIMAthis.operacion = "√";
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "√";
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // FUNCION SENO
+        this.operacion = "sin";
+        this.numB=Double.parseDouble(this.Display.getText());
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // FUNCION COSENO
+        this.operacion = "cos";
+        this.numB=Double.parseDouble(this.Display.getText());
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // FUNCION TANGENTE
+        this.operacion = "tan";
+        this.numB=Double.parseDouble(this.Display.getText());
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        //FUNCION IVA
+        this.numA=Double.parseDouble(this.Display.getText());
+        this.operacion = "IVA";
+        this.Display.setText("");
+    }//GEN-LAST:event_jButton13ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -540,6 +751,7 @@ class OperacionTrigonometrica extends OperacionBasica{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Display;
+    private javax.swing.JLabel MiniDisplay;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -564,5 +776,7 @@ class OperacionTrigonometrica extends OperacionBasica{
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
