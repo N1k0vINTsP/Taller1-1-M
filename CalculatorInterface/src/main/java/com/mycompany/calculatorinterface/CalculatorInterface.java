@@ -43,10 +43,10 @@ class OperacionBasica{
             }
             case "√" -> {
                 // raiz enesima
-                if(numA == 0 && numB<0 || numA == 0 && numB == 0 || numA<0){
+                if(numB == 0 && numA<0 || numA == 0 && numB == 0 || numB<0){
                     return Double.NaN;
                 }else{
-                    return Math.pow(numA, 1.0/numB); //numA es el radicando y numB es el indice
+                    return Math.pow(numB, 1.0/numA); //numA es el radicando y numB es el indice
                 }
             }
 
@@ -103,8 +103,11 @@ class OperacionTrigonometrica extends OperacionBasica{
 
     public double numA;
     public double numB;
+    public String proceso = "";
+    public String proceso2 = "";
     public String operacion;
     public double resultado;
+    
     
     OperacionTrigonometrica op = new OperacionTrigonometrica();
     public CalculatorInterface() {
@@ -570,8 +573,9 @@ class OperacionTrigonometrica extends OperacionBasica{
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+        // AC
         this.Display.setText("");
+        this.MiniDisplay.setText("");
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -611,7 +615,9 @@ class OperacionTrigonometrica extends OperacionBasica{
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // SUMA
-        this.numA=Double.parseDouble(this.Display.getText());
+        this.numA =Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " + ");
         this.operacion = "+";
         this.Display.setText("");
         
@@ -622,6 +628,36 @@ class OperacionTrigonometrica extends OperacionBasica{
         if("+".equals(this.operacion)|| "-".equals(this.operacion)|| "*".equals(this.operacion)|| "/".equals(this.operacion)||"√".equals(this.operacion)||"^".equals(this.operacion)|| "IVA".equals(this.operacion)){
            
             this.numB=Double.parseDouble(this.Display.getText());
+            
+            if("+".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " + " + this.proceso2 + " = ");
+            }
+            if("-".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " - " + this.proceso2 + " = ");
+            }
+            if("*".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " * " + this.proceso2 + " = ");
+            }
+            if("/".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " / " + this.proceso2 + " = ");
+            }
+            if("^".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " ^ " + this.proceso2 + " = ");
+            }
+            if("√".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " ^√ " + this.proceso2 + " = ");
+            }
+            if("IVA".equals(this.operacion)){
+                this.proceso2 = Double.toString(this.numB);
+                this.MiniDisplay.setText(this.proceso + " * " + this.proceso2 + " % = ");
+            }
+            
             this.resultado = op.operar(operacion, numA, numB);
             if(!Double.isNaN(resultado)){
                 resultado = (Math.round(resultado*100000)/100000.0);
@@ -632,6 +668,20 @@ class OperacionTrigonometrica extends OperacionBasica{
         if("sin".equals(this.operacion)|| "cos".equals(this.operacion)|| "tan".equals(this.operacion)){
             
             this.numB=Double.parseDouble(this.Display.getText());
+            
+            if("sin".equals(this.operacion)){
+                this.proceso = Double.toString(this.numB);
+                this.MiniDisplay.setText( " sin( "+ this.proceso + " ) = ");
+            }
+            if("cos".equals(this.operacion)){
+                this.proceso = Double.toString(this.numB);
+                this.MiniDisplay.setText( " cos( "+ this.proceso + " ) = ");
+            }
+            if("tan".equals(this.operacion)){
+                this.proceso = Double.toString(this.numB);
+                this.MiniDisplay.setText( " tan( "+ this.proceso + " ) = ");
+            }
+            
             this.resultado = op.operar(operacion, 0, numB);
             if(!Double.isNaN(resultado)){
                 resultado = (Math.round(resultado*100000)/100000.0);
@@ -644,6 +694,8 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // RESTA
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " - ");
         this.operacion = "-";
         this.Display.setText("");
         
@@ -652,6 +704,8 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // MULTIPLICACION
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " * ");
         this.operacion = "*";
         this.Display.setText("");
     }//GEN-LAST:event_jButton21ActionPerformed
@@ -659,6 +713,8 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // DIVISION
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " / ");
         this.operacion = "/";
         this.Display.setText("");
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -673,13 +729,17 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // POTENCIA ENESIMA
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " ^ ");
         this.operacion = "^";
         this.Display.setText("");
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // RAIZ ENESIMAthis.operacion = "√";
+        // RAIZ ENESIMA
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " ^√ ");
         this.operacion = "√";
         this.Display.setText("");
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -687,13 +747,16 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         // FUNCION SENO
         this.operacion = "sin";
+        this.MiniDisplay.setText( " sin( ");
         this.numB=Double.parseDouble(this.Display.getText());
+
         this.Display.setText("");
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // FUNCION COSENO
         this.operacion = "cos";
+        this.MiniDisplay.setText( " cos( ");
         this.numB=Double.parseDouble(this.Display.getText());
         this.Display.setText("");
     }//GEN-LAST:event_jButton23ActionPerformed
@@ -701,6 +764,7 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // FUNCION TANGENTE
         this.operacion = "tan";
+        this.MiniDisplay.setText( " tan( ");
         this.numB=Double.parseDouble(this.Display.getText());
         this.Display.setText("");
     }//GEN-LAST:event_jButton17ActionPerformed
@@ -708,6 +772,8 @@ class OperacionTrigonometrica extends OperacionBasica{
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         //FUNCION IVA
         this.numA=Double.parseDouble(this.Display.getText());
+        this.proceso = Double.toString(this.numA);
+        this.MiniDisplay.setText(this.proceso + " * ");
         this.operacion = "IVA";
         this.Display.setText("");
     }//GEN-LAST:event_jButton13ActionPerformed
